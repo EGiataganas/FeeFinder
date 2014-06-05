@@ -1,4 +1,7 @@
-<h3>Home</h3>
-<% @users.each do |user| %>
-  <p>User: <%=link_to user.name, user %></p>
+<h5>Home</h5>
+
+<% if current_user %>
+  <p>Hello, <%=link_to current_user.name %> you have just signed in, yey</p>
+<% else %>
+  <p>You are not Logged-In please <%=link_to 'Sign up', new_user_registration_path%>, or <%= link_to 'Login', new_user_session_path %>!<p>
 <% end %>
