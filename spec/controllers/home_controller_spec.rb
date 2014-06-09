@@ -22,19 +22,17 @@ describe HomeController do
   end
 
   context "when I'm logged in" do
-
     before (:each) do
       @user = FactoryGirl.create(:user, name: "Bob")
       sign_in @user
     end 
-  
-  describe "GET 'index'" do
-    it "should be successful" do
-      get :index
-      response.body.should match 'Bob'
+    
+    describe "GET 'index'" do
+      it "should be successful" do
+        get :index
+        response.body.should match 'Bob'
+      end
     end
-
   end
 
-end
 end

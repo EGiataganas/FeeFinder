@@ -6,10 +6,7 @@ describe FeesController do
 
   render_views
 
-  before (:each) do
-    @feeTest = FactoryGirl.create(:fee)
-    # sign_in @user
-  end
+  let(:fee) {FactoryGirl.create(:fee)}
   # # This should return the minimal set of attributes required to create a valid
   # # Studet. As you add validations to Studet, be sure to
   # # adjust the attributes here as well.
@@ -65,41 +62,45 @@ describe FeesController do
 # end 
 
 describe "GET 'index'" do
+
       it "should be successful" do
         get :index
         response.should be_success
       end
 
-      # it 'should show "Login" link' do
-      #   get :index
-      #   response.body.should match 'Login'
-      # end
-    end
+       it 'should show "Show" link' do
+         get :index
+         response.body.should match 'Show'
+       end
 
-describe "GET index" do
-    it "assigns all fees as fees" do
-      fee = FactoryGirl.create(:fee)
-      get :index#, {}, valid_session
+       it "assigns @fees" do
+        fee = FactoryGirl.create(:fee)
+        get :index
 
-    # assert_response :success
-    # assert_not_nil assigns(:fees)
-      expect(assigns(:fees)).to eq([@fee])
-    end
+        assert_response :success
+        assert_not_nil assigns(:fees)
+        #expect(assigns(:fees)).to eq([@fee])
+      end
+end
 
+# describe "GET index" do
+   
     # when I visit '/' i expect the status code to be 200 or success
     # when I'm not logged in I expect to see 'log in'
     # when I'm logged in I expect to see my name
     
-  end
+  # end
 
-  describe "GET show" do
+  describe "GET 'show'" do
+    it "should be successful" do
+      #ap fee, :plain => true this for debugging to show us the values of fee
+        get :show, :id => fee.id
+        response.should be_success
+      end
+
     it "assigns the requested fee as @fee" do
-      get :show, :id => @fee.id
-      response.should be_success
-      # get :show, {:id => @fee.to_param}, valid_session
-      # expect(assigns(:fee)).to eq(@fee)
-      # expect(assigns(:fee)).to eq(@fee)
-
+      get :show, :id => fee.id
+      assigns(:fee).should ==fee
     end
   end
 

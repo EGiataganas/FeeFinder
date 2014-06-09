@@ -1,4 +1,4 @@
-class FeesController < ApplicationController
+class FeesController < ApplicationController :include, ActionController::StrongParameters
 
   # before_filter :authenticate_user!
   # before_action only: [:show, :edit, :update, :destroty]
@@ -9,7 +9,7 @@ class FeesController < ApplicationController
   end
 
   def show
-    # @fee = Fee.find(params[:id])
+     @fee = Fee.find(params[:id])
   end
 
   def new
@@ -17,6 +17,7 @@ class FeesController < ApplicationController
   end
 
   def edit
+    @fee = Fee.find(params[:id])
   end
 
   def create
