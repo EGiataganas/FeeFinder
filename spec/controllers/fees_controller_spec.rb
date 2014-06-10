@@ -6,25 +6,22 @@ describe FeesController do
 
   render_views
 
-  before (:each) do
-    @feeTest = FactoryGirl.create(:fee)
-    # sign_in @user
-  end
-  # # This should return the minimal set of attributes required to create a valid
-  # # Studet. As you add validations to Studet, be sure to
-  # # adjust the attributes here as well.
-  # let(:valid_attributes) {
-  #   skip("Add a hash of attributes valid for your model")
-  # }
+  let(:fee) {FactoryGirl.create(:fee)}
+  # This should return the minimal set of attributes required to create a valid
+  # Studet. As you add validations to Studet, be sure to
+  # adjust the attributes here as well.
+  let(:valid_attributes) {
+    skip("Add a hash of attributes valid for your model")
+  }
 
-  # let(:invalid_attributes) {
-  #   skip("Add a hash of attributes invalid for your model")
-  # }
+  let(:invalid_attributes) {
+    skip("Add a hash of attributes invalid for your model")
+  }
 
-  # # This should return the minimal set of values that should be in the session
-  # # in order to pass any filters (e.g. authentication) defined in
-  # # StudetsController. Be sure to keep this updated too.
-  # let(:valid_session) { {} }
+  # This should return the minimal set of values that should be in the session
+  # in order to pass any filters (e.g. authentication) defined in
+  # StudetsController. Be sure to keep this updated too.
+  let(:valid_session) { {} }
 
 # context "when user is NOT logged in" do 
 
@@ -65,54 +62,58 @@ describe FeesController do
 # end 
 
 describe "GET 'index'" do
+
       it "should be successful" do
         get :index
         response.should be_success
       end
 
-      # it 'should show "Login" link' do
-      #   get :index
-      #   response.body.should match 'Login'
-      # end
-    end
+       it 'should show "Show" link' do
+         get :index
+         response.body.should match 'Show'
+       end
 
-describe "GET index" do
-    it "assigns all fees as fees" do
-      fee = FactoryGirl.create(:fee)
-      get :index#, {}, valid_session
+       it "assigns @fees" do
+        fee = FactoryGirl.create(:fee)
+        get :index
 
-    # assert_response :success
-    # assert_not_nil assigns(:fees)
-      expect(assigns(:fees)).to eq([@fee])
-    end
+        assert_response :success
+        assert_not_nil assigns(:fees)
+        #expect(assigns(:fees)).to eq([@fee])
+      end
+end
 
+# describe "GET index" do
+   
     # when I visit '/' i expect the status code to be 200 or success
     # when I'm not logged in I expect to see 'log in'
     # when I'm logged in I expect to see my name
     
-  end
+  # end
 
-  describe "GET show" do
+  describe "GET 'show'" do
+    it "should be successful" do
+      #ap fee, :plain => true this for debugging to show us the values of fee
+        get :show, :id => fee.id
+        response.should be_success
+      end
+
     it "assigns the requested fee as @fee" do
-      get :show, :id => @fee.id
-      response.should be_success
-      # get :show, {:id => @fee.to_param}, valid_session
-      # expect(assigns(:fee)).to eq(@fee)
-      # expect(assigns(:fee)).to eq(@fee)
-
+      get :show, :id => fee.id
+      assigns(:fee).should ==fee
     end
   end
 
   describe "GET new" do
     it "assigns a new fee as @fee" do
-      get :new, {}, valid_session
+      get :new, {}
       expect(assigns(:fee)).to be_a_new(Fee)
     end
   end
 
   describe "GET edit" do
     it "assigns the requested fee as @fee" do
-      get :edit, {:id => @fee.to_param}, valid_session
+      get :edit, {:id => @fee.to_param}
       expect(assigns(:fee)).to eq(@fee)
     end
   end
@@ -121,30 +122,30 @@ describe "GET index" do
     describe "with valid params" do
       it "creates a new Fee" do
         expect {
-          post :create, {:fee => valid_attributes}, valid_session
+          post :create, {:fee => valid_attributes}
         }.to change(Fee, :count).by(1)
       end
 
       it "assigns a newly created fee as @fee" do
-        post :create, {:fee => valid_attributes}, valid_session
+        post :create, {:fee => valid_attributes}
         expect(assigns(:fee)).to be_a(Fee)
         expect(assigns(:fee)).to be_persisted
       end
 
       it "redirects to the created fee" do
-        post :create, {:fee => valid_attributes}, valid_session
+        post :create, {:fee => valid_attributes}
         expect(response).to redirect_to(Fee.last)
       end
     end
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved fee as @fee" do
-        post :create, {:fee => invalid_attributes}, valid_session
+        post :create, {:fee => invalid_attributes}
         expect(assigns(:fee)).to be_a_new(Fee)
       end
 
       it "re-renders the 'new' template" do
-        post :create, {:fee => invalid_attributes}, valid_session
+        post :create, {:fee => invalid_attributes}
         expect(response).to render_template("new")
       end
     end
@@ -157,30 +158,30 @@ describe "GET index" do
       }
 
       it "updates the requested fee" do
-        put :update, {:id => @fee.to_param, :fee => new_attributes}, valid_session
+        put :update, {:id => @fee.to_param, :fee => new_attributes}
         fee.reload
         skip("Add assertions for updated state")
       end
 
       it "assigns the requested fee as @fee" do
-        put :update, {:id => @fee.to_param, :fee => valid_attributes}, valid_session
+        put :update, {:id => @fee.to_param, :fee => valid_attributes}
         expect(assigns(:fee)).to eq(@fee)
       end
 
       it "redirects to the fee" do
-        put :update, {:id => @fee.to_param, :fee => valid_attributes}, valid_session
+        put :update, {:id => @fee.to_param, :fee => valid_attributes}
         expect(response).to redirect_to(@fee)
       end
     end
 
     describe "with invalid params" do
       it "assigns the fee as @fee" do
-        put :update, {:id => @fee.to_param, :fee => invalid_attributes}, valid_session
+        put :update, {:id => @fee.to_param, :fee => invalid_attributes}
         expect(assigns(:fee)).to eq(@fee)
       end
 
       it "re-renders the 'edit' template" do
-        put :update, {:id => @fee.to_param, :fee => invalid_attributes}, valid_session
+        put :update, {:id => @fee.to_param, :fee => invalid_attributes}
         expect(response).to render_template("edit")
       end
     end
@@ -189,14 +190,13 @@ describe "GET index" do
   # describe "DELETE destroy" do
   #   it "destroys the requested fee" do
   #     expect {
-  #       delete :destroy, {:id => @fee.to_param}, valid_session
+  #       delete :destroy, {:id => @fee.to_param}
   #     }.to change(Fee, :count).by(-1)
   #   end
 
   #   it "redirects to the fees list" do
-  #     delete :destroy, {:id => @fee.to_param}, valid_session
+  #     delete :destroy, {:id => @fee.to_param}
   #     expect(response).to redirect_to(fees_url)
   #   end
   # end
-
-end
+ end

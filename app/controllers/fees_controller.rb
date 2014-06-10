@@ -1,6 +1,6 @@
 class FeesController < ApplicationController
 
-  # before_filter :authenticate_user!
+  before_filter :authenticate_user!
   # before_action only: [:show, :edit, :update, :destroty]
   before_filter only: [:show, :edit, :update, :destroty]
 
@@ -9,18 +9,19 @@ class FeesController < ApplicationController
   end
 
   def show
-    # @fee = Fee.find(params[:id])
+     @fee = Fee.find(params[:id])
   end
 
   def new
-  	@fee = Fee.new
+    @fee = Fee.new
   end
 
   def edit
+    @fee = Fee.find(params[:id])
   end
 
   def create
-    @fee = Fee.new(fee_params)
+    @fee = Fee.new(params[:fee])
 
     respond_to do |format|
       if @fee.save
@@ -34,8 +35,9 @@ class FeesController < ApplicationController
   end
 
   def update
+    @fee = Fee.find(params[:id])
     respond_to do |format|
-      if @fee.update(fee_params)
+      if @fee.update_attributes(params[:fee])
         format.html { redirect_to @fee, notice: 'Fee was successfully updated.' }
         format.json { render :show, status: :ok, location: @fee }
       else
@@ -46,6 +48,7 @@ class FeesController < ApplicationController
   end
 
   def destroy
+    @fee = Fee.find(params[:id])
     @fee.destroy
     respond_to do |format|
       format.html { redirect_to fees_url, notice: 'Fee was successfully destroyed.' }
@@ -56,9 +59,5 @@ class FeesController < ApplicationController
   private
     def set_fee
       @fee = Fee.find(params[:id])
-    end
-
-    def fee_params
-      params.require(:fee).permit(:name, :amount)
     end
 end
