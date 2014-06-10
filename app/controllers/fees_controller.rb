@@ -1,4 +1,4 @@
-class FeesController < ApplicationController
+class FeesController < ApplicationController :include, ActionController::StrongParameters
 
   before_filter :authenticate_user!
   # before_action only: [:show, :edit, :update, :destroty]
