@@ -1,67 +1,19 @@
 
 require 'spec_helper'
 
-#RSpec.describe FeeController, :type => :controller do
 describe FeesController do
 
-  render_views
+  #render_views
 
   let(:fee) {FactoryGirl.create(:fee)}
-  # This should return the minimal set of attributes required to create a valid
-  # Studet. As you add validations to Studet, be sure to
-  # adjust the attributes here as well.
-  let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
-  }
 
-  let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
-  }
+  # let(:valid_attributes ) do 
 
-  # This should return the minimal set of values that should be in the session
-  # in order to pass any filters (e.g. authentication) defined in
-  # StudetsController. Be sure to keep this updated too.
-  let(:valid_session) { {} }
+  # end
 
 # context "when user is NOT logged in" do 
 
-#   describe "GET 'show'" do
-    
-#     it "should be successful" do
-#       get :show, :id => @user.id
-#       response.should_not be_success
-#     end
-    
-#     it "should find the right user" do
-#       get :show, :id => @user.id
-#       response.should redirect_to(new_user_session)
-#     end
-#   end
-# end 
-
-# context "when user is logged in must be able to view, edit & delete fee" do 
-#   before (:each) do
-#     @user = FactoryGirl.create(:user)
-#     @fee = FactoryGirl.create(:fee)
-#     sign_in @user
-#   end
-
-#   describe "GET 'show'" do
-    
-#     it "should be successful" do
-#       get :show, :id => @user.id
-#       get :show, :id => @fee.id
-#       response.should be_success
-#     end
-    
-#     it "should find the right user" do
-#       get :show, :id => @fee.id
-#       assigns(:fee).should == @fee
-#     end
-#   end
-# end 
-
-describe "GET 'index'" do
+  describe "GET 'index'" do
 
       it "should be successful" do
         get :index
@@ -81,7 +33,7 @@ describe "GET 'index'" do
         assert_not_nil assigns(:fees)
         #expect(assigns(:fees)).to eq([@fee])
       end
-end
+  end
 
 # describe "GET index" do
    
@@ -113,8 +65,9 @@ end
 
   describe "GET edit" do
     it "assigns the requested fee as @fee" do
-      get :edit, {:id => @fee.to_param}
-      expect(assigns(:fee)).to eq(@fee)
+      ap fee, :plain => true
+      get :edit, :id => fee.id
+      expect(assigns(:fee)).to eq(fee)
     end
   end
 
@@ -138,17 +91,7 @@ end
       end
     end
 
-    describe "with invalid params" do
-      it "assigns a newly created but unsaved fee as @fee" do
-        post :create, {:fee => invalid_attributes}
-        expect(assigns(:fee)).to be_a_new(Fee)
-      end
-
-      it "re-renders the 'new' template" do
-        post :create, {:fee => invalid_attributes}
-        expect(response).to render_template("new")
-      end
-    end
+    
   end
 
   describe "PUT update" do
@@ -174,17 +117,6 @@ end
       end
     end
 
-    describe "with invalid params" do
-      it "assigns the fee as @fee" do
-        put :update, {:id => @fee.to_param, :fee => invalid_attributes}
-        expect(assigns(:fee)).to eq(@fee)
-      end
-
-      it "re-renders the 'edit' template" do
-        put :update, {:id => @fee.to_param, :fee => invalid_attributes}
-        expect(response).to render_template("edit")
-      end
-    end
   end
 
   # describe "DELETE destroy" do
