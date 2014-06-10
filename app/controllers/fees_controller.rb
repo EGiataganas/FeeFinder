@@ -5,6 +5,8 @@ class FeesController < ApplicationController
   before_filter only: [:show, :edit, :update, :destroty]
 
   def index
+    puts "++++++ DEBUG INDEX ++++++ #{__FILE__}::#{__LINE__} ++++\n"
+    
     @fees = Fee.all
   end
 

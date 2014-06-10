@@ -3,36 +3,33 @@ require 'spec_helper'
 
 describe FeesController do
 
-  #render_views
+  # render_views
 
   let(:fee) {FactoryGirl.create(:fee)}
 
-  # let(:valid_attributes ) do 
 
-  # end
-
-# context "when user is NOT logged in" do 
+  # context "when user is NOT logged in" do 
 
   describe "GET 'index'" do
 
-      it "should be successful" do
-        get :index
-        response.should be_success
-      end
+    it "should be successful" do
+      get :index
+      response.should be_success
+    end
 
-       it 'should show "Show" link' do
-         get :index
-         response.body.should match 'Show'
-       end
+     it 'should show "Show" link' do
+       get :index
+       response.body.should match 'Show'
+     end
 
-       it "assigns @fees" do
-        fee = FactoryGirl.create(:fee)
-        get :index
+     it "assigns @fees" do
+      fee = FactoryGirl.create(:fee)
+      get :index
 
-        assert_response :success
-        assert_not_nil assigns(:fees)
-        #expect(assigns(:fees)).to eq([@fee])
-      end
+      assert_response :success
+      assert_not_nil assigns(:fees)
+      #expect(assigns(:fees)).to eq([@fee])
+    end
   end
 
 # describe "GET index" do
