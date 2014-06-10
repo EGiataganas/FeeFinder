@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 ruby '2.1.2'
 gem 'rails', '3.2.14'
 gem 'sqlite3'
+gem 'cancan'
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
@@ -19,7 +20,6 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'rspec-rails'
   gem 'awesome_print'
-  gem 'binding_of_caller'
 end
 group :test do
   gem 'capybara'
