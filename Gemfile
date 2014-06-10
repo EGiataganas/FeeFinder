@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 ruby '2.1.2'
-# gem 'rails-api', git: 'https://github.com/rails-api/rails-api.git', branch: 'master'
 gem 'rails', '3.2.14'
 gem 'sqlite3'
 gem 'cancan'
