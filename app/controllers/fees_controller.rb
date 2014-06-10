@@ -1,6 +1,6 @@
 class FeesController < ApplicationController
 
-  before_filter :authenticate_user!
+  # before_filter :authenticate_user!
   # before_action only: [:show, :edit, :update, :destroty]
   before_filter only: [:show, :edit, :update, :destroty]
 
