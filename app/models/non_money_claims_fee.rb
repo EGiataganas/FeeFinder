@@ -1,0 +1,3 @@
+class NonMoneyClaimsFee < Fee
+
+end
