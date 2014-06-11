@@ -54,7 +54,7 @@ class FeesController < ApplicationController
   def update
     @fee = Fee.find(params[:id])
     respond_to do |format|
-      ap params[:fee]
+      # ap params[:fee]
       if @fee.update_attributes(params[:fee])
         format.html { redirect_to @fee, notice: 'Fee was successfully updated.' }
         format.json { render :show, status: :ok, location: @fee }
