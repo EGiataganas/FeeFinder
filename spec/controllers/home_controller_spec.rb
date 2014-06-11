@@ -30,7 +30,7 @@ describe HomeController do
     describe "GET 'index'" do
       it "should be successful" do
         get :index
-        response.body.should match 'Bob'
+        response.should redirect_to(fees_path)
       end
     end
   end
