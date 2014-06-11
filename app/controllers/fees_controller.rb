@@ -1,10 +1,8 @@
 class FeesController < ApplicationController
 
-  # before_filter :authenticate_admin!
-  # before_filter only: [:show, :edit, :update, :destroty]
   before_filter :authenticate_user!
-  # before_action only: [:show, :edit, :update, :destroty]
-  before_filter only: [:show]
+  before_filter only: [:index]
+  before_filter :authenticate_admin!, except: [:show, :index]
 
   def index
     @fees = Fee.all
@@ -18,7 +16,7 @@ class FeesController < ApplicationController
      @fee = Fee.find(params[:id])
      respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @fees }
+      format.json { render json: @fee }
     end
   end
 
@@ -26,7 +24,7 @@ class FeesController < ApplicationController
     @fee = Fee.new
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @fees }
+      format.json { render json: @fee }
     end
   end
 
@@ -35,7 +33,7 @@ class FeesController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @fees }
+      format.json { render json: @fee }
     end
   end
 
@@ -81,6 +79,9 @@ class FeesController < ApplicationController
       @fee = Fee.find(params[:id])
     end
 
+    def authenticate_admin!
+      redirect_to fees_path, notice: "Must be admin" unless current_user.admin?
+    end
     # def fee_params
     #   params.require(:fee).permit(:name, :amount)
     # end

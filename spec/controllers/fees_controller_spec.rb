@@ -17,8 +17,10 @@ describe FeesController do
 
   context "when user is logged in" do 
 
+    let(:user_factory) { :user }
+
     before (:each) do
-      @user = FactoryGirl.create(:user)
+      @user = FactoryGirl.create(user_factory)
       sign_in @user
     end
 
@@ -70,9 +72,18 @@ describe FeesController do
   end
 
   describe "GET new" do
-    it "assigns a new fee as @fee" do
-      get :new, {}
-      expect(assigns(:fee)).to be_a_new(Fee)
+    context "user is admin" do
+      let(:user_factory) { :admin }     
+      it "assigns a new fee as @fee" do
+        get :new, {}
+        expect(assigns(:fee)).to be_a_new(Fee)
+      end
+    end
+    context "user is not admin" do 
+      it "redirects to the fees index" do
+        get :new, {}
+        response.should redirect_to(fees_path)
+      end
     end
   end
 
