@@ -1,11 +1,11 @@
 require 'spec_helper'
 
 describe UsersController do
-  
+
   context "when user is NOT logged in" do 
 
     describe "GET 'show'" do
-      
+
       it "should be successful" do
         get :show, :id => @user.id
         response.should_not be_success
@@ -19,13 +19,14 @@ describe UsersController do
   end 
 
   context "when user is logged in" do 
+    
     before (:each) do
       @user = FactoryGirl.create(:user)
       sign_in @user
     end
 
     describe "GET 'show'" do
-      
+
       it "should be successful" do
         get :show, :id => @user.id
         response.should be_success

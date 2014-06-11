@@ -1,28 +1,42 @@
 class FeesController < ApplicationController
 
-  # before_filter :authenticate_user!
+  # before_filter :authenticate_admin!
+  # before_filter only: [:show, :edit, :update, :destroty]
+  before_filter :authenticate_user!
   # before_action only: [:show, :edit, :update, :destroty]
-  before_filter only: [:show, :edit, :update, :destroty]
+  before_filter only: [:show]
 
   def index
-    puts "++++++ DEBUG INDEX ++++++ #{__FILE__}::#{__LINE__} ++++\n"
-    
     @fees = Fee.all
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @fees }
+    end
   end
 
   def show
      @fee = Fee.find(params[:id])
+     respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @fees }
+    end
   end
 
   def new
     @fee = Fee.new
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @fees }
+    end
   end
 
   def edit
-    puts "+++++++++++++++++++++++++++++++++++++"
-    pp params
     @fee = Fee.find(params[:id])
-     ap @fee
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @fees }
+    end
   end
 
   def create
@@ -42,6 +56,7 @@ class FeesController < ApplicationController
   def update
     @fee = Fee.find(params[:id])
     respond_to do |format|
+      ap params[:fee]
       if @fee.update_attributes(params[:fee])
         format.html { redirect_to @fee, notice: 'Fee was successfully updated.' }
         format.json { render :show, status: :ok, location: @fee }

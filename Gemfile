@@ -28,3 +28,7 @@ group :test do
   gem 'email_spec'
   gem 'launchy'
 end
+
+gem 'byebug'
+gem 'pry'
+gem 'pry-nav'
