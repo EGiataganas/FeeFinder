@@ -38,11 +38,11 @@ class FeesController < ApplicationController
   end
 
   def create
-    @fee = Fee.new(params[:fee])
+    @fee = FeeFactory.new(params[:fee]).build
 
     respond_to do |format|
       if @fee.save
-        format.html { redirect_to @fee, notice: 'Fee was successfully created.' }
+        format.html { redirect_to fee_path(@fee), notice: 'Fee was successfully created.' }
         format.json { render :show, status: :created, location: @fee }
       else
         format.html { render :new }
@@ -82,7 +82,8 @@ class FeesController < ApplicationController
     def authenticate_admin!
       redirect_to fees_path, notice: "Must be admin" unless current_user.admin?
     end
-    # def fee_params
-    #   params.require(:fee).permit(:name, :amount)
-    # end
+
+    def fee_params
+      params.require(:fee).permit(:name, :amount, :start_range, :end)
+    end
 end
