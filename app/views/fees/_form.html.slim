@@ -1,0 +1,19 @@
+= form_for(@fee) do |f|
+  - if @fee.errors.any?
+    #error_explanation
+      h2
+        = pluralize(@fee.errors.count, "error")
+        | prohibited this fee from being saved:
+      ul
+        - @fee.errors.full_messages.each do |message|
+          li= message
+  .field
+    = f.label :name
+    br
+      = f.text_field :name
+  .field
+    = f.label :amount
+    br
+      = f.number_field :amount
+  .actions
+    = f.submit

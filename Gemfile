@@ -32,3 +32,6 @@ end
 gem 'byebug'
 gem 'pry'
 gem 'pry-nav'
+gem "slim-rails"
+gem 'govuk_frontend_toolkit', '1.2.0'
+gem 'moj_template', '0.12.0'

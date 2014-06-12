@@ -1,0 +1,9 @@
+p#notice= notice
+p
+  strong Name:
+  = @fee.name
+p
+  strong Amount:
+  = @fee.amount
+  = link_to 'Edit', edit_fee_path(@fee)
+  =link_to 'Back', fees_path
