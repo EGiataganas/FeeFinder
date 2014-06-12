@@ -13,7 +13,7 @@ gem 'devise'
 gem 'figaro'
 group :development do
   gem 'better_errors'
-  gem 'binding_of_caller', :platforms=>[:mri_19, :mri_20, :rbx]
+  gem 'binding_of_caller'
   gem 'quiet_assets'
 end
 group :development, :test do
