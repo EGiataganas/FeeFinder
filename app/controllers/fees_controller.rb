@@ -1,8 +1,7 @@
 class FeesController < ApplicationController
 
 
-  before_filter except: [:show, :index]
-  before_filter :authenticate_user!
+  # before_filter
   before_filter only: [:index]
   before_filter :authenticate_admin!, except: [:show, :index]
 

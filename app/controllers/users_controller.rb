@@ -10,4 +10,8 @@ class UsersController < ApplicationController
     @user.admin?
   end
 
+  def destroy
+
+  	puts "DESTROY   !!!!!!"
+  end
 end
